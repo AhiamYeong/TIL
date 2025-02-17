@@ -25,6 +25,9 @@ public class queue1_선형큐 {
 		// 공백인지 검사
 		if (isEmpty()) {
 			System.out.println("비어있다잉");
+			return -1;
+			// 근데 사실 얘를 쓸 수 있나 없나는 ... 문제를 보고 판단해야 함
+			// 문제에서 범위가 -100 ~ 100까지면 좃또 곤란해지기 때문
 		}
 		// 공백이면 front에 있는 값 제거하고 front 올리기
 		return queue[front++];
