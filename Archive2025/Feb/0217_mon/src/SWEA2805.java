@@ -16,7 +16,7 @@ public class SWEA2805 {
 				}
 			}
 			
-			// center는 항상 [N][N] -> N = 1일 때는 틀리는데?
+			// center는 항상 farm[N/2][N/2]
 			
 		} // tc
 		sc.close();

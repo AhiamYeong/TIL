@@ -21,7 +21,7 @@ public class queue4_마이쮸시뮬레이션 {
 			// TODO Auto-generated method stub
 			return super.toString();
 		}
-	}
+	} // inner class
 	
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
