@@ -5,6 +5,7 @@ public class SWEA1232 {
 		return (value == "+" || value == "-" || value == "*" || value == "/" || value == "%");
 	}
 	
+	// 중위탐색 들어가면 안됨 
 	public static int inOrder(String[][] tree, int v) {
 		// v는 찾기 시작할 idx
 		int N = tree.length; 
