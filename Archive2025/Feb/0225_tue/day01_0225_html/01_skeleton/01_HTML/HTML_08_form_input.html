@@ -12,19 +12,36 @@
   <h2>form과 input</h2>
 
   <!-- form 태그 생성 -->
-    <!-- label 태그 생성 -->
-    <!-- input 태그 생성 -->
-    <!-- button 태그 생성 -->
-    
-    
-    <!-- select 태그 생성 -->
-      <!-- option 태그 생성 -->
+   <!-- method 지정안하면 default get -->
+  <form action="" method="GET"> 
+  <!-- label 태그 생성 -->
+   <label>이름: </label>
+  <!-- input 태그 생성 -->
+   <!-- name 반드시 지정해야, 서버에 전송했을 때 key: val값이 잘 날아감 -->
+   <input type="text" name="username" placeholder="이름을 작성하세요">
+  <!-- button 태그 생성 -->
+  <button>전송</button>
+  
+  <!-- select 태그 생성 -->
+   <!-- name에 value값 지정되어 제출됨 -->
+  <select name="location" id="">
+    <option value="seoul">서울</option>
+    <option value="busan">부산</option>
+  </select>
+  <!-- option 태그 생성 -->
+  
+  
+  <!-- fieldset 태그 생성 -->
+   <fieldset>
+     <legend>나의 이야기 </legend>
+    <textarea name="text" id=""></textarea>
+   </fieldset>
+  <!-- legend 태그 생성 -->
+  <!-- textarea 태그 생성 -->
+  <!-- 제출버튼 -->
+   <input type="submit" value="제출">
 
-
-    <!-- fieldset 태그 생성 -->
-      <!-- legend 태그 생성 -->
-      <!-- textarea 태그 생성 -->
-
+  </form>
   
 </body>
 </html>
