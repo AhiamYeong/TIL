@@ -2,7 +2,7 @@ import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
 
-public class BOJ_1316 {
+public class BOJ_1316 { // 그룹 단어 체커
 	public static void main(String[] args) {
 		// 각 문자 연속해서 나타남 /
 		Scanner sc = new Scanner(System.in);

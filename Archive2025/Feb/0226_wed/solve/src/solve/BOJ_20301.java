@@ -33,9 +33,9 @@ public class BOJ_20301 {
 				idx = (idx + K - 1) % arr.size();
 			} else {
 				
-				idx = (idx - K) % arr.size();
+				idx = (idx - K + 2) % arr.size();
 				if (idx < 0) { // 음수로 떨어지면 
-					idx = (idx - K + arr.size()) % arr.size();
+					idx = (idx - K + 2 + arr.size()) % arr.size();
 				}
 			}
 			

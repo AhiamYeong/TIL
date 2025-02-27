@@ -2,8 +2,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class BOJ_20301 {
-	public static void main(String[] args) {
-		// M명 제거될 때마다 제거할 방향 돌리기
+  public static void main(String[] args) {
+    
+    // M명 제거될 때마다 제거할 방향 돌리기
 		Scanner sc = new Scanner(System.in);
 		int N = sc.nextInt(); // N명
 		int K = sc.nextInt(); // 제거할 순서
@@ -21,22 +22,20 @@ public class BOJ_20301 {
 		// 사람 수 0 될 때까지 지우기 
 		// 처음은 시계방향으로 제거 -> 반시계 -> 시계 돌아가기
 		boolean clockwise = true;
-		while(arr.size() != 0) {
+		while(!arr.isEmpty()) {
 			// 0부터 시작했으므로 출력할 사람 번호는 +1
 			System.out.println(arr.get(idx));
 			arr.remove(idx);
 			cnt++; // 제거한 후 cnt up
 			
-			System.out.println(arr);
+			// System.out.println(arr);
 			// 다음 제거할 idx 결정 & size 하나씩 감소하게 되므로
 			if (clockwise) {
+        // 시계방향일 때 우측 idx 조절 
 				idx = (idx + K - 1) % arr.size();
 			} else {
-				
-				idx = (idx - K) % arr.size();
-				if (idx < 0) { // 음수로 떨어지면 
-					idx = (idx - K + arr.size()) % arr.size();
-				}
+
+        idx = (idx - K - 2 + arr.size()) % arr.size();
 			}
 			
 			// M번 돌았으면 반전 
@@ -47,6 +46,6 @@ public class BOJ_20301 {
 			}
 			
 		} //제거 
-				
-	}
+    sc.close();
+  } // main
 }
