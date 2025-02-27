@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>마진 병합(Margin Collapsing) 데모</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .demo-box {
+        background-color: #f0f0f0;
+        padding: 20px;
+        margin-bottom: 40px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+      }
+
+      .normal-case,
+      .collapse-case {
+        display: flex;
+        margin-bottom: 40px;
+      }
+
+      .case-title {
+        margin-bottom: 10px;
+        font-weight: bold;
+        color: #333;
+      }
+
+      .column {
+        flex: 1;
+      }
+
+      .example-box {
+        background-color: #e0e0e0;
+        border: 1px solid #ccc;
+        padding: 10px;
+        text-align: center;
+      }
+
+      /* 일반적인 상황 (마진 병합 없음) */
+      .normal-parent {
+        background-color: #f8d7da;
+        border: 1px solid #f5c6cb;
+        padding: 1px; /* 중요: 경계를 만들어주는 패딩 */
+        width: 300px;
+      }
+
+      .normal-child {
+        background-color: #d4edda;
+        border: 1px solid #c3e6cb;
+        margin: 20px;
+        padding: 10px;
+      }
+
+      /* 마진 병합이 발생하는 상황 */
+      .collapse-parent {
+        background-color: #f8d7da;
+        border: 1px solid #f5c6cb;
+        width: 300px;
+        /* 패딩이 없음 */
+      }
+
+      .collapse-child {
+        background-color: #d4edda;
+        border: 1px solid #c3e6cb;
+        margin: 20px;
+        padding: 10px;
+      }
+
+      /* 인접 요소의 마진 병합 */
+      .adjacent-demo {
+        margin-bottom: 40px;
+      }
+
+      .adjacent-box1 {
+        background-color: #cce5ff;
+        border: 1px solid #b8daff;
+        padding: 10px;
+        margin-bottom: 30px; /* 30px 하단 마진 */
+      }
+
+      .adjacent-box2 {
+        background-color: #d1ecf1;
+        border: 1px solid #bee5eb;
+        padding: 10px;
+        margin-top: 50px; /* 50px 상단 마진 */
+      }
+
+      /* 시각적 마커 */
+      .margin-marker {
+        position: relative;
+        height: 0;
+        overflow: visible;
+      }
+
+      .margin-marker::before {
+        content: "";
+        position: absolute;
+        left: -10px;
+        right: -10px;
+        height: 30px;
+        background-color: rgba(255, 193, 7, 0.2);
+        border: 1px dashed #ffc107;
+        z-index: -1;
+      }
+
+      .margin-marker.collapsed::before {
+        height: 50px;
+        background-color: rgba(220, 53, 69, 0.2);
+        border: 1px dashed #dc3545;
+      }
+
+      .label {
+        display: inline-block;
+        padding: 2px 8px;
+        border-radius: 4px;
+        font-size: 12px;
+        margin-top: 5px;
+      }
+
+      .label-normal {
+        background-color: #ffc107;
+        color: #212529;
+      }
+
+      .label-collapsed {
+        background-color: #dc3545;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>마진 병합(Margin Collapsing) 데모</h1>
+      <p>CSS에서 마진 병합은 특정 상황에서 두 요소의 마진이 하나로 합쳐지는 현상입니다. 이 데모에서는 주요 마진 병합 상황을 시각적으로 보여줍니다.</p>
+
+      <div class="demo-box">
+        <h2>1. 부모-자식 요소 간의 마진 병합</h2>
+        <p>부모 요소에 패딩, 테두리, 또는 인라인 콘텐츠가 없을 때 자식 요소의 마진이 부모 요소를 통과하여 바깥으로 병합됩니다.</p>
+
+        <div class="normal-case">
+          <div class="column">
+            <div class="case-title">일반적인 상황 (패딩 있음)</div>
+            <div class="normal-parent">
+              <div class="normal-child">자식 요소 (마진: 20px)</div>
+            </div>
+            <div class="label label-normal">부모 요소에 패딩이 있어 마진 병합 방지</div>
+          </div>
+          <div class="column">
+            <div class="case-title">마진 병합 상황 (패딩 없음)</div>
+            <div class="collapse-parent">
+              <div class="collapse-child">자식 요소 (마진: 20px)</div>
+            </div>
+            <div class="label label-collapsed">자식의 마진이 부모를 통과하여 병합됨</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="demo-box">
+        <h2>2. 인접 요소 간의 마진 병합</h2>
+        <p>세로로 인접한 두 요소의 마진이 병합됩니다. 이때 더 큰 마진 값이 적용됩니다.</p>
+
+        <div class="adjacent-demo">
+          <div class="example-box">실제 마진 간격</div>
+          <div class="adjacent-box1">첫 번째 박스 (margin-bottom: 30px)</div>
+          <div class="margin-marker collapsed"></div>
+          <div class="adjacent-box2">두 번째 박스 (margin-top: 50px)</div>
+          <div class="label label-collapsed">두 마진이 병합되어 더 큰 값인 50px만 적용됨 (30px + 50px = 50px)</div>
+        </div>
+
+        <div class="adjacent-demo">
+          <div class="example-box">마진이 병합되지 않았다면</div>
+          <div style="margin-bottom: 30px; background-color: #cce5ff; border: 1px solid #b8daff; padding: 10px">첫 번째 박스 (margin-bottom: 30px)</div>
+          <div class="margin-marker" style="height: 30px"></div>
+          <div class="margin-marker" style="height: 50px"></div>
+          <div style="margin-top: 0; background-color: #d1ecf1; border: 1px solid #bee5eb; padding: 10px">두 번째 박스 (margin-top: 50px)</div>
+          <div class="label label-normal">병합이 없다면 두 마진의 합인 80px이 적용됨 (30px + 50px = 80px)</div>
+        </div>
+      </div>
+
+      <div class="demo-box">
+        <h3>마진 병합 규칙 요약</h3>
+        <ul>
+          <li>인접한 블록 요소들 사이에서 발생합니다.</li>
+          <li>부모-자식 요소 관계에서 부모에 패딩, 테두리, 또는 인라인 콘텐츠가 없을 때 발생합니다.</li>
+          <li>빈 요소의 상단과 하단 마진 사이에서도 발생합니다.</li>
+          <li>병합될 때는 항상 더 큰 마진 값이 적용됩니다.</li>
+          <li>마진 병합을 방지하려면 패딩, 테두리, 인라인 콘텐츠, 또는 BFC(Block Formatting Context)를 생성하세요.</li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>
