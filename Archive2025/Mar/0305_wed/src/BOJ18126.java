@@ -1,5 +1,8 @@
 import java.util.*;
 public class BOJ18126 {
+	public static int maxLen;
+	public static boolean[] visited;
+	
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		
@@ -11,12 +14,16 @@ public class BOJ18126 {
 		
 		// root: 1, 1 기준으로 얼마나 깊이 들어가건 최대값만 있으면 댐 
 		// 인접리스트로 연결상태 확인
-		List<ArrayList<Integer>> list = new ArrayList<>();
+//		List<ArrayList<Integer>> list = new ArrayList<>();
+		
+		// 거리 상태는 어떻게 저장할지 지선생에게 물어봄 > (노드, 거리)
+		List<ArrayList<int[]>> list = new ArrayList<>();
 		
 		for (int i = 0; i <= N; i++) {
-			list.add(new ArrayList<Integer>());
+			list.add(new ArrayList<int[]>());
 		} // initialize (1-based idx)
 		
+		// 거리 저장은 어떻게?? > 배열로 
 		for (int i = 0; i < N-1; i++) {
 			int node1 = sc.nextInt();
 			int node2 = sc.nextInt();
@@ -24,12 +31,36 @@ public class BOJ18126 {
 			
 			// 1 연결상태 확인 & 2 node 간 거리 확인 
 			// 양방향 연결 > 근데 양방향이 의미가 있나?
-			list.get(node1).add(node2);
-			list.get(node2).add(node1);
+			list.get(node1).add(new int[] {node2, length});
+			list.get(node2).add(new int[] {node1, length});
 		} // graph edge
 		
+		visited = new boolean[N+1];
+		// root node 1 기준으로 dfs 수행 & 최대 length 찾기
+		dfs(1, 0, list);
 		
+		System.out.println(maxLen);
 		
 		sc.close();
+	}
+	
+	// 지피티 도움받음 
+	public static void dfs(int curr, int length, List<ArrayList<int[]>> list) {
+		// root node 시작으로 탐색 수행
+		visited[curr] = true;
+		// 최대값 업데이트 
+		maxLen = Math.max(maxLen, length);
+		
+		// 노드 인접리스트 기반 다음노드 선택
+		for (int[] next: list.get(curr)) {
+			// 배열에 다음노드, 노드와 거리 저장되어있음 
+			int nextNode = next[0];
+			int nextDist = next[1];
+			
+			// 인접리스트로 하나씩 찾아서 들어가기 
+			if (!visited[nextNode]) {
+				dfs(nextNode, length + nextDist, list); 
+			}
+		}
 	}
 }
