@@ -17,7 +17,8 @@ public class BOJ17086 {
 		} // input
 		
 		// 이제 여기 dfs를 어떻게 적용할 것인가
-		 
+		// 탐색은 8방으로 가능
+		
 		sc.close();
 		
 	}
