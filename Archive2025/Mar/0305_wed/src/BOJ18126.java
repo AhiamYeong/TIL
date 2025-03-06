@@ -1,7 +1,8 @@
 import java.util.*;
 public class BOJ18126 {
-	public static int maxLen;
+	public static long maxLen;
 	public static boolean[] visited;
+	public static List<ArrayList<int[]>> list;
 	
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
@@ -9,16 +10,16 @@ public class BOJ18126 {
 		int N = sc.nextInt();
 		
 		// 1번 root 기준 가장 깊이 탐색 -> dfs인듯
-		// 최대한 깊게 들어간 후
-		// backtracking 하기 전까지의 값 누적해서 최대값 찾아내기
+		// 최대한 깊게 들어갈 수 있는 모든 경우의 수 전부 확인
+		// 노드별로 가장 깊이 들어간 값 누적해서 최대값 찾아내기
 		
 		// root: 1, 1 기준으로 얼마나 깊이 들어가건 최대값만 있으면 댐 
 		// 인접리스트로 연결상태 확인
 //		List<ArrayList<Integer>> list = new ArrayList<>();
 		
-		// 거리 상태는 어떻게 저장할지 지선생에게 물어봄 > (노드, 거리)
-		List<ArrayList<int[]>> list = new ArrayList<>();
-		
+		// 거리 상태는 어떻게 저장할지 지선생에게 물어봄 > (노드, 거리) 쌍 받기 
+		list = new ArrayList<>();
+
 		for (int i = 0; i <= N; i++) {
 			list.add(new ArrayList<int[]>());
 		} // initialize (1-based idx)
@@ -30,14 +31,15 @@ public class BOJ18126 {
 			int length = sc.nextInt(); // node1, node2 사이 거리
 			
 			// 1 연결상태 확인 & 2 node 간 거리 확인 
-			// 양방향 연결 > 근데 양방향이 의미가 있나?
+			// 양방향 연결
 			list.get(node1).add(new int[] {node2, length});
 			list.get(node2).add(new int[] {node1, length});
 		} // graph edge
 		
 		visited = new boolean[N+1];
 		// root node 1 기준으로 dfs 수행 & 최대 length 찾기
-		dfs(1, 0, list);
+		// 시작노드, 누적 거리
+		dfs(1, 0);
 		
 		System.out.println(maxLen);
 		
@@ -45,8 +47,8 @@ public class BOJ18126 {
 	}
 	
 	// 지피티 도움받음 
-	public static void dfs(int curr, int length, List<ArrayList<int[]>> list) {
-		// root node 시작으로 탐색 수행
+	public static void dfs(int curr, long length) {
+		// root node 시작으로 탐색 수행 > 방문 체크 
 		visited[curr] = true;
 		// 최대값 업데이트 
 		maxLen = Math.max(maxLen, length);
@@ -59,7 +61,7 @@ public class BOJ18126 {
 			
 			// 인접리스트로 하나씩 찾아서 들어가기 
 			if (!visited[nextNode]) {
-				dfs(nextNode, length + nextDist, list); 
+				dfs(nextNode, length + nextDist); 
 			}
 		}
 	}

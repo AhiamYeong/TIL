@@ -2,8 +2,8 @@ import java.util.*;
 
 public class BOJ17086 {
 	// 8방 탐색 가능
-	public static int[] dx = { -1, -1, 0, 1, 1, 1, 0, -1 };
-	public static int[] dy = { -1, 0, 1, 1, 0, -1, -1, -1 };
+	public static int[] dx = { -1, -1, -1, 0, 0, 1, 1, 1 };
+	public static int[] dy = { -1, 0, 1, -1, 1, -1, 0, 1 };
 
 	// 1인 위치 기준으로 찾아서 다음 1 만날때까지 bfs 진행
 	// 1인 꼭짓점 여러 개 > 매 꼭짓점마다 수행 
@@ -44,7 +44,11 @@ public class BOJ17086 {
 					// 거리 같이 큐에 주기 
 					queue.offer(new int[] {x, y, 0});
 					visited[x][y] = true;
+					// 3개 나오자나
+//					System.out.println("값");
+//					System.out.println(x + " " + y);
 				}
+				// 1이 될 수 있는 값이 1개가 아니자나
 			} // y이동
 		} // x이동
 		
@@ -56,7 +60,7 @@ public class BOJ17086 {
 			int x = curr[0];
 			int y = curr[1];
 			int dist = curr[2];
-//			int dist = 0; 
+//				int dist = 0; 
 			// dist 전체 변수로 관리하면 경우의 수마다 관리 XX 
 			// 큐에서 주면서 경우마다 관리해야 함 
 			
@@ -69,13 +73,13 @@ public class BOJ17086 {
 				
 				// 범위 내의 1인지 검증 & 미방문 따라가기 
 				if (inBoard(nextX, nextY, N, M) && !visited[nextX][nextY]) {
-					// 범위 내라면 시작점 queue에 넣기 
-					// 방문처리 먼저! 
-					visited[nextX][nextY] = true;
 					// 이동
+                    // 다음좌표 거리 = 현재거리 + 1
+//						dist++;
+					visited[nextX][nextY] = true;
+					// 범위 내라면 시작점 queue에 넣기 
 					queue.offer(new int[] {nextX, nextY, dist+1});
-					// 다음좌표 거리 = 현재거리 + 1
-//					dist++;
+					
 				}
 			}
 		}
