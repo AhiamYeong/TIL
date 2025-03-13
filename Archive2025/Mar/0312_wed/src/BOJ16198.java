@@ -67,16 +67,12 @@ public class BOJ16198 {
 	static void calc() {
 		int sum = 0;
 		
-		for (int sidx = 0; sidx < sel.length; sidx++) {
-			// sel은 어차피 인덱스 저장했음 
-			
-			// visited 재사용: 사용 체크
-			
-			visited[sidx] = true;
-			int center = sidx;
-			int left = sidx - 1;
-			int right = sidx + 1;
-			
+		// sel은 어차피 인덱스 저장했음 
+		for (int idx : sel) {
+			visited[idx] = true;
+			int left = idx - 1;
+			int right = idx + 1;
+			System.out.println(arr[idx] + ": " + arr[left] + " " + arr[right]);
 			// 이미 사용한 변수면 더 땡기기
 			while (visited[left]) {
 				left--;
@@ -85,14 +81,10 @@ public class BOJ16198 {
 				right++;
 			}
 			
-//			while (visited[left] && left >= 0) left--;
-//			while (visited[right] && right < N) right++;
-
-		///////////// 여기를 고치면 될 것 같은데 ////////////
 			sum += arr[left] * arr[right];
-			
-			System.out.println(sum);
-		} // sidx 전체 돌기 
+
+		}
 		if (sum > max) max = sum;
+
 	} // 에너지 합 계산 
 }
