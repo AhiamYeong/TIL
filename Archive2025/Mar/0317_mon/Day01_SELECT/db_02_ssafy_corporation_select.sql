@@ -137,10 +137,21 @@ SELECT count(*), sum(sal), avg(sal), max(sal), min(sal)
 FROM emp;
 
 # Q23. 모든 사원에 대하여 부서, 사원수, 급여총액, 평균급여, 최고급여, 최저급여를 부서별로 조회하고, 소수점 둘째자리 반올림
+SELECT deptno, count(*), sum(sal), round(avg(sal), 2),  max(sal), min(sal)
+# 부서별로 조회
+FROM emp
+GROUP BY deptno, job
+ORDER BY deptno;
+
 
 # Q24. 모든 사원에 대하여 부서, 업무, 사원수, 급여총액, 평균급여, 최고급여, 최저급여를 부서별, 직급별로 조회
+SELECT deptno, job, count(*), sum(sal), round(avg(sal), 2),  max(sal), min(sal)
+# 부서별로 조회
+FROM emp
+GROUP BY deptno, job;
+
 
 # Q25. 급여(커미션포함) 평균이 2000이상인 부서번호, 부서별 사원수, 평균급여(커미션포함) 조회 
-
+# if null로 대체 가능 
 
 
