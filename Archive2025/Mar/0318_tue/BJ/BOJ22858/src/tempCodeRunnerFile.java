@@ -1,0 +1,1 @@
+em.out.println(board[i]);
