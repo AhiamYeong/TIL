@@ -7,7 +7,10 @@
  * 회전 완료할 때마다 상태를 계속해서 저장장
  * K번 회전 완료한 후, 결과는 12시방향(idx 첫 번째) 점수로 계산 
  */
+import java.util.Deque;
+import java.util.LinkedList;
 import java.util.Scanner;
+import javax.xml.transform.Templates;
 
 // 톱니바퀴 큐로 하면 편할 것 같은데..
 
@@ -28,28 +31,60 @@ public class BOJ14891 {
     for (int i = 0; i < K; i++){
       int target = sc.nextInt() - 1; // 회전시킨 톱니바퀴 번호 (0-based idx)
       int direction = sc.nextInt(); // 1 시계방향, -1 반시계방향 
+      boolean clockwise = direction == 1;
       
+      while (true) { 
+          
+      
+      // 회전 1회차 수행
       // 왼쪽, 오른쪽 바퀴 가리키기 > target이 끝값일 때 사용 X
       int left = target - 1;
       int right = target + 1;
       if (target == 0) left = -1;
       if (target == 3) right = -1; 
 
-      // 회전 1회차 수행
-      while (true) { 
-        // 회전 전 양쪽 값 검사: 값 같으면 회전수행, 다르면 수행X
-        // target 왼쪽과 검사: left[2] == target[6]인지 
-        if (left[2] == target[6]) 회전수행;
-        // target 오른쪽과 검사: right[6] == target[2]인지
+      // 양 끝을 돌릴지/말지 파악하는 건 실제 회전 수행 '전'
+      // target 하나를 찍고 양옆 idx 먼저 비교한 후에 돌리기 
 
-        // 왼쪽 다 끝내고 오른쪽 봐야 되는거아냐? 재귀로밖에 못하는거아녀? 
-        // -1이 아닐 때만 사용 
-        if (right[6] == target[2]) 회전수행;
+      // target 톱니 돌리기
+      Deque<Integer> deque = new LinkedList<>();
+      for (int j = 0; j < 8; j++){
+        deque.add(wheels[target][j]);
+      } 
 
-        // 왼쪽이든 오른쪽이든 회전수행 한 후 상태 배열 업데이트
+      // 내 톱니는 direction대로 돌리기
+      if (clockwise) deque.addFirst(deque.pollLast());
+      for (int j = 0; j < 8; j++){
+        wheels[target][j] = deque.pollFirst();
+      } 
 
-        // 톱니바퀴 '언제' 업데이트가 핵심인 것 같은데????????
+
+      // 회전 전 양쪽 값 검사: 맞닿은 값 다르면 회전수행, 같으으면 수행X
+      // target 왼쪽과 검사: left[2] & target[6]
+      while (wheels[left][2] != wheels[target][6]) {
+        
+
+
+        target = left; 
+        if (left != 0) break;
+        left--; 
+        right--;
       }
+      
+      // target 오른쪽과 검사: right[6] & target[2]
+
+      // 왼쪽 다 끝내고 오른쪽 봐야 되는거아냐? 재귀로밖에 못하는거아녀? 
+      // -1이 아닐 때만 사용 
+      while (wheels[right][6] != wheels[target][2]) {
+        target = right;
+        if (right != 3) break;
+        right++;
+        left++;
+      }
+
+      // 왼쪽이든 오른쪽이든 회전수행 한 후 상태 배열 업데이트
+
+      // 톱니바퀴 '언제' 업데이트가 핵심인 것 같은데????????
 
 
       // 왼쪽/오른쪽 연쇄적으로 일어나야 함 > 밀고 갈 방향 설정
