@@ -6,6 +6,7 @@
  *   극 다르면 회전X, 바로 확인 멈춤 
  * 회전 완료할 때마다 상태를 계속해서 저장장
  * K번 회전 완료한 후, 결과는 12시방향(idx 첫 번째) 점수로 계산 
+ * 반시계방향 회전: 원소 1칸 왼쪽으로 밀기, 시계방향: 원소 1칸 오른쪽으로 밀기
  */
 import java.util.Deque;
 import java.util.LinkedList;
@@ -21,27 +22,31 @@ public class BOJ14891 {
     // 12시부터 시계방향 8개 / N극 0 S극 1
     int[][] wheels = new int[4][8];
     for (int i = 0; i < 4; i++){
+      // \n 올 때까지 입력받기 
+      String s = sc.nextLine();
       for (int j = 0; j < 8; j++){
-        wheels[i][j] = sc.nextInt();
+        wheels[i][j] = s.charAt(j) - '0';
       }
     } // input 
 
     int K = sc.nextInt(); // 회전 횟수 
-    // 회전 방법
+
+    // 1회전 종료 조건 > 톱니바퀴 1/4번까지 다 보거나 left or right와 극이 같은 경우
     for (int i = 0; i < K; i++){
+
       int target = sc.nextInt() - 1; // 회전시킨 톱니바퀴 번호 (0-based idx)
+      // 원복 위해 tmp에 저장
+      int tmp = target; 
       int direction = sc.nextInt(); // 1 시계방향, -1 반시계방향 
       boolean clockwise = direction == 1;
-      
-      while (true) { 
           
-      
-      // 회전 1회차 수행
+
       // 왼쪽, 오른쪽 바퀴 가리키기 > target이 끝값일 때 사용 X
       int left = target - 1;
       int right = target + 1;
-      if (target == 0) left = -1;
-      if (target == 3) right = -1; 
+      boolean leftdir = !clockwise;
+      boolean rightDir = !clockwise;
+
 
       // 양 끝을 돌릴지/말지 파악하는 건 실제 회전 수행 '전'
       // target 하나를 찍고 양옆 idx 먼저 비교한 후에 돌리기 
@@ -51,57 +56,67 @@ public class BOJ14891 {
       for (int j = 0; j < 8; j++){
         deque.add(wheels[target][j]);
       } 
-
+      
       // 내 톱니는 direction대로 돌리기
       if (clockwise) deque.addFirst(deque.pollLast());
+      else deque.addLast(deque.pollFirst());
       for (int j = 0; j < 8; j++){
-        wheels[target][j] = deque.pollFirst();
+        wheels[target][j] = deque.pollFirst(); // 순서대로 다시 넣기 
       } 
-
+      deque.clear();
 
       // 회전 전 양쪽 값 검사: 맞닿은 값 다르면 회전수행, 같으으면 수행X
       // target 왼쪽과 검사: left[2] & target[6]
-      while (wheels[left][2] != wheels[target][6]) {
+      while (left >= 0 && wheels[left][2] != wheels[target][6]) {
+        // 왼쪽은 왼쪽으로만 돌리고 오른쪽은 오른쪽으로만 돌리고
         
+        for (int j = 0; j < 8; j++){
+          deque.add(wheels[left][j]);
+        } 
 
-
-        target = left; 
-        if (left != 0) break;
+        // 반대로 돌리기 
+        if (leftdir) deque.addLast(deque.pollFirst());
+        else deque.addFirst(deque.pollLast());
+        
+        for (int j = 0; j < 8; j++){
+          wheels[left][j] = deque.pollFirst(); // 순서대로 다시 넣기 
+        } 
+        deque.clear();
+        target = left;
         left--; 
-        right--;
-      }
+
+        // * 돌리기 * 
+        leftdir = !(leftdir);
+      } // target 왼쪽 검사 
+
+      // target 원복
+      target = tmp;
       
       // target 오른쪽과 검사: right[6] & target[2]
+      while (right <= 3 && wheels[right][6] != wheels[target][2]) {
+        
+        for (int j = 0; j < 8; j++){
+          deque.add(wheels[right][j]);
+        } 
 
-      // 왼쪽 다 끝내고 오른쪽 봐야 되는거아냐? 재귀로밖에 못하는거아녀? 
-      // -1이 아닐 때만 사용 
-      while (wheels[right][6] != wheels[target][2]) {
+        // 반대로 돌리기 
+        if (rightDir) deque.addLast(deque.pollFirst());
+        else deque.addFirst(deque.pollLast());
+        
+        for (int j = 0; j < 8; j++){
+          wheels[right][j] = deque.pollFirst(); // 순서대로 다시 넣기 
+        } 
+        deque.clear();
+
         target = right;
-        if (right != 3) break;
         right++;
-        left++;
-      }
+
+        // * 돌리기 * 
+        rightDir = !(rightDir);
+      } // target 오른쪽 검사
+    }
 
       // 왼쪽이든 오른쪽이든 회전수행 한 후 상태 배열 업데이트
-
-      // 톱니바퀴 '언제' 업데이트가 핵심인 것 같은데????????
-
-
-      // 왼쪽/오른쪽 연쇄적으로 일어나야 함 > 밀고 갈 방향 설정
-
-      // 반시계방향 회전: 원소 1칸 왼쪽으로 밀기, 시계방향: 원소 1칸 오른쪽으로 밀기
-      // 차라리 큐로 해볼까?
-
-      // 1회전의 종료 조건 > 톱니바퀴 1/4번까지 다 보거나 left or right와 극이 같은 경우
-
-      // target + 양옆 보고 > 다음 것도 돌 수 있으면 > target 이동시켜서 다시 검ㅅ ㅏ
-      // left 가야하는 signal > left 계속 이동시키면서 보기
-      // right > right 계속 이동시키며 보기 
-
-      // 회전이 연쇄적으로 일어나고 종료 조건 명확하니까 재귀로 쓸 수 있을 것 같은데 
-
-    } // 회전 완료
-
     // 점수 계산 > 각 바퀴 0번째 idx만 보기 (가중치 다름)
     int score = 0;
     // 각 행별로 0번째 원소에 값 곱하기 
