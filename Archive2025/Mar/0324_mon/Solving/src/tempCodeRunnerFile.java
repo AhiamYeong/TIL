@@ -11,23 +11,23 @@ public class BOJ17212 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int N = sc.nextInt(); // 지불해야 하는 금액 
-        int[] dp = new int[N+1]; // 1 based idx 이용 위해 
+        int[] dp = new int[N+2]; // 1 based idx 이용 위해 
         int[] coins = {1, 2, 5, 7};
 
         // 지피티 조언: 처음에 dp[i] = Integer.MAX_VALUE로 전부 초기화해 판단하기 
-        for (int i = 1; i < dp.length; i++) dp[i] = Integer.MAX_VALUE;
-
+        for (int i = 0; i <= dp.length; i++) dp[i] = Integer.MAX_VALUE;
+        
         // 단 하나 최소인 경우의 수
-        if (N >= 1) dp[1] = 1; 
-        if (N >= 2) dp[2] = 1;
-        if (N >= 5) dp[5] = 1;
-        if (N >= 7) dp[7] = 1;
+        dp[1] = 1; 
+        dp[2] = 1;
+        dp[5] = 1;
+        dp[7] = 1;
         
         // dp[N]: N이라는 수를 만드는 조합의 수 중 최솟값
 
 
         // dp 배열 채우기
-        for (int i = 1; i <= N; i++){
+        for (int i = 3; i <= N; i++){
             // 이미 초기값으로 있으면 pass
             // if (dp[i] != 0) continue;
             // 점화식 ///////// 부터 다시 보기 ////////////////
