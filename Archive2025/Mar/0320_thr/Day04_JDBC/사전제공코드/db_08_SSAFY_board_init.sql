@@ -18,3 +18,5 @@ VALUES ("아직은 괜찮아-BackEnd01 Serlvet","양띵균","Servlet이란 ~~~~~
 	   ("아직은 괜찮아-BackEnd02 JSP", "양띵균", "JSP란~~~");
 
 SELECT * FROM board;
+
+DELETE FROM board WHERE id=2;
