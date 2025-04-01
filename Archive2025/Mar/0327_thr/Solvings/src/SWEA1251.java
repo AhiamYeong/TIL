@@ -13,7 +13,7 @@ import java.util.Scanner;
 
 public class SWEA1251 {
 
-  static int[] parents; // root 저장 배열
+  static Land[] parent; // root 저장 배열
 
   static class Land {
     int x;
@@ -26,13 +26,13 @@ public class SWEA1251 {
   }
 
   static class Edge {
-    Land a;
-    Land b;
+    Land from;
+    Land to;
     double cost; 
 
-    public Edge(Land a, Land b, double cost) {
-      this.a = a;
-      this.b = b;
+    public Edge(Land from, Land to, double cost) {
+      this.from = from;
+      this.to = to;
       this.cost = cost;
     }
 
@@ -87,21 +87,32 @@ public class SWEA1251 {
       });
 
       // 2. V-1개 간선 뽑기 (사이클 X, 서로소 집합 이용)
-      parents = new int[N]; 
+      parent = new Land[N]; 
 
       // make-set(본인 대표 초기화)
       for (int i = 0; i < N; i++) {
-        parents[i] = i;  
+        parent[i] = new Land(0, 0);  
       }
 
       // 누적 비용
       int ans = 0; 
       
       // 그래프 연결해서 최소비용 찾기
-      ////////////////////////////////////////
+      /////////////////////////////////////////////////////////
       for (int i = 0; i < edges.length; i++){
+        Land st = edges[i].from;
+        Land ed = edges[i].to;
+
+        // 1. 사이클 검사 수행 -> 사이클이 없다면 합치기
+        Land px = find(st);
+        Land py = find(ed);
+
+        if (px != py){
+
+        }
 
       }
+      /////////////////////////////////////////////////////////
     } // tc
     sc.close();
   }
@@ -110,5 +121,19 @@ public class SWEA1251 {
   static double calLength(Land a, Land b){
     // 직선의 방정식 
     return Math.sqrt(Math.pow(a.x - b.x, 2) + Math.pow(a.y - b.y, 2));
+  }
+
+  static Land find(Land x){
+    if (parent[x] != x) parent[x] = find(parent[x]);
+    return parent[x];
+  }
+
+  // x, y 연결하기
+  static void union(int x, int y){
+    int rootX = find(x);
+    int rootY = find(y);
+
+    // rank 안 줬으므로, x를 y 밑으로 ㄱㄱ
+    parent[rootX] = rootY; 
   }
 }
