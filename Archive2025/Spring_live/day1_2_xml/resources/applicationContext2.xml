@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+	<!-- bean definitions here -->
+	<!-- bean 등록 코드 (풀패키지명 사용 필요)-->
+	<bean class="com.ssafy.di.Desktop" id="desktop"></bean>
+	<!-- 생성자 주입 -->
+	<bean class="com.ssafy.di.Programmer" id="programmer">
+		<!-- 2. 직접 조립하기: 프로그래머가 desktop 필요로 하니까 // 직접 관계 작성-->
+		<!-- <constructor-arg ref="desktop"></constructor-arg> -->
+	</bean>
+	
+	<!-- 설정자 주입-->
+	<bean class="com.ssafy.di.Programmer" id="programmer">
+		<property name="comptuer" ref="desktop"></property>
+	</bean>
+</beans>
