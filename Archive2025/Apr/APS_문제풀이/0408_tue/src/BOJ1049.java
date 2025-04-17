@@ -45,6 +45,13 @@ public class BOJ1049 {
 		int pkg = 0;
 		int each = 0;
 		
+		// 1 pkg만 구매
+		int case1 = ((N / 6) + 1) * brands[minPkgIdx][0];
+		
+		// 2 each만 구매 
+		int case2 = N * brands[minEachIdx][1];
+		
+		// 3 pkg + each
 		if (N > 6) {
 			pkg = N / 6;
 			each = N - (pkg * 6); 
@@ -52,10 +59,9 @@ public class BOJ1049 {
 			each = N;
 		}
 		
-		int money = pkg * brands[minPkgIdx][0] + each * brands[minEachIdx][1];
+		int case3 = pkg * brands[minPkgIdx][0] + each * brands[minEachIdx][1];
 		
-		int compMoney = (pkg + 1) * brands[minPkgIdx][0];
-		System.out.println(Math.min(money, compMoney));
+		System.out.println(Math.min(case1, Math.min(case2, case3)));
 		
 		sc.close();
 	}
