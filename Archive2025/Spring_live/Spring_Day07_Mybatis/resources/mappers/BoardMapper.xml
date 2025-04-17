@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.board.model.dao.BoardDao">
+
+	<!-- type: DTO type, id: 정의를 가리키는 이름 -->
+	<resultMap type="Board" id="boardMap">
+		<!-- 컬럼명 / getter-setter명 -->
+		<result column="view_cnt" property="viewCnt" />
+		<result column="reg_date" property="regDate" />
+
+	</resultMap>
+	<!-- 전체 게시글 조회 -->
+	<!-- SQL문 간다잇 / resultType은 alias로 작성 -->
+	<select id="selectAll" resultType="Board">
+		<!-- 변수명 table이랑 dto랑 다르면 인식 못 하니까 alias로 컬럼명 맞춰주기 -->
+		SELECT id, title, writer, content, reg_date AS regDate, view_cnt AS
+		viewCnt FROM board;
+	</select>
+
+
+	<!-- 상세 게시글 조회: resultMap은 위에서 직접 정의내린 id -->
+	<!-- parameterType에 int만 넘겼고, #에 파라미터명 다르게 해도 인식됨?? 근데 굳이 다르게[ 할 필요는 X  -->
+	
+	<!-- 여러 개 만들고 싶을 때: 1 DTO 객체를 넘긴다 2 파라미터타입에 Map 이용한다(이땐 이름 중요) -->
+	<select id="selectOne" resultMap="boardMap" parameterType="int">
+		<!-- 방식 1. ${} (살짝 위험쓰) 2. #{} -->
+		SELECT * FROM board
+		WHERE id = #{id}
+	</select>
+	
+	<!-- 게시글 등록: parameter type에 board - 생성자에 있는 내용 -->
+	<insert id="insertBoard" parameterType="Board">
+		INSERT INTO board (title, writer, content)
+		VALUES (#{title}, #{writer}, #{content});
+	</insert>
+	
+	<!-- 게시글 삭제: parameter type에 # 안에 들어갈 내용 넘기기 -->
+	<delete id="deleteBoard" parameterType="int">
+		DELETE FROM board
+		WHERE id = #{id};
+	</delete>
+
+	<!-- 게시글 수정: update -->
+	<update id="updateBoard" parameterType="Board">
+		UPDATE board
+		SET title = #{title}, content = #{content}, reg_date = now()
+		WHERE id = #{id};
+	</update>
+	
+	<!-- 조회수 증가 -->
+	<update id="updateViewCnt" parameterType="int">
+		UPDATE board 
+		SET view_cnt = view_cnt + 1 
+		WHERE id = #{id};
+	</update> 
+</mapper>

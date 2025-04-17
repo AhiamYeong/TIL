@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<!-- 순서가 갱장히 중요하다 이말이여 -->
+	<typeAliases>
+		<typeAlias type="com.ssafy.board.model.dto.Board"
+			alias="Board" />
+	</typeAliases>
+
+
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">
+
+				<!-- 여기 파일도 좀 관리할 수 있을 것 같은데 라는 생각 하긔 -->
+				<property name="driver" value="com.mysql.cj.jdbc.Driver" />
+				<property name="url"
+					value="jdbc:mysql://localhost:3306/ssafy_board?serverTimezone=UTC" />
+				<property name="username" value="ssafy" />
+				<property name="password" value="ssafy1234" />
+
+			</dataSource>
+		</environment>
+	</environments>
+	<!-- 직접 등록한 xml의 경로 바꾸기 -->
+	<mappers>
+		<mapper resource="mappers/boardMapper.xml" />
+	</mappers>
+</configuration>

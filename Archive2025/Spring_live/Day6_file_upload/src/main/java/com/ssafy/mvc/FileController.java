@@ -17,6 +17,7 @@ public class FileController {
 	@PostMapping("/singleFileUpload")
 	public String postMethodName(@RequestParam ("file") MultipartFile file) {
 
+		if (file != null )
 		System.out.println(file.getSize());
 		return "result";
 	}
