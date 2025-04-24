@@ -38,6 +38,8 @@ public class BoardServiceImpl implements BoardService{
 		System.out.println("게시글 작성");
 		boardDao.insertBoard(board);
 	}
+	
+	// service에서는 void, controller에서는 
 
 	@Transactional
 	@Override

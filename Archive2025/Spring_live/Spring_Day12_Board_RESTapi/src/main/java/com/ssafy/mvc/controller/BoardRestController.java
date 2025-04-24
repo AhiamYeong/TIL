@@ -102,6 +102,9 @@ public class BoardRestController {
 		
 		// 지금은 아주 씸플하게 ok를 넘겼지만... 
 		
+		// 그러면 아래 로직을 처리하는건 service 내부에서인가 controller에서인가 
+		
+		// 지피티 피셜 1-3은 service가 처리, 4는 controller가 처리해야 함 
 		// 1. 존재하지 않는 게시글에 대한 수정 요청
 		// 2. 요청 본문(@RequestBody)에 필수 데이터 누락
 		// 3. DB 수정 실패 시 예외 처리 부족
