@@ -1,3 +1,8 @@
+DROP DATABASE IF EXISTS `ssafydb`;
+
+CREATE DATABASE IF NOT EXISTS `ssafydb`;
+USE `ssafydb`;
+
 -- -----------------------------------------------------
 -- Table `user`
 -- -----------------------------------------------------

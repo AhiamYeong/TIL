@@ -1,4 +1,4 @@
-package com.ssafy.ws;
+package com.ssafy.ws.controller;
 
 import java.text.DateFormat;
 import java.util.Date;
