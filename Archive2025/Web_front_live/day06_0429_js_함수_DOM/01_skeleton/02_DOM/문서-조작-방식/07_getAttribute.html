@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="./assets/style.css">
+</head>
+<body>
+  <div id="ssafy">싸피</div>
+  <script>
+    // 매개변수에 담은 속성 이름 값 반환
+    // 담은 속성 존재하지 않는 경우 null 반환
+    // ssafy라는 id 가진 element 자체 잡기 
+    const ssafy = document.getElementById('ssafy')
+
+    // 해당 ele에서 'id'속성 추출 
+    const myId = ssafy.getAttribute('id')
+    const myName = ssafy.getAttribute('name') // name 속성 없으므로 null 출력
+  </script>
+</body>
+</html>

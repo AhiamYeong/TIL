@@ -1,0 +1,136 @@
+<!-- 자.. 그래서 느낌표! 하게 되면 자동완성으로 기본 HTML구조가 완성이 되는거죠…! 
+ 컨트롤 누른 상태로 마우스휠을 왔다갔다하면 크기가 커졌다 작아졌다 하구요…!
+ctrl+B: 좌측 사이드뷰를 켰다껐다 가능 / ctrl+` : 하단의 터미널을 켰다껐다 가능 / 
+h1 후 탭 → 자동완성, h1*5 후 탭 → Emmet 도구에 의해 자동 완성 / ctrl+shift+방향키 : 멀티커서 지정
+lorem : 우리가 필요한 만큼 의미 없는 글자를 생성해주는 기능. (레이아웃 테스트, 디자인 작업 시 유용) 
++ lorem에 숫자 N을 붙이게 되면 단어 수를 지정할 수 있다…!  
+shift+alt+f : 코드 자동정렬 / ctrl+space : 자동완성
+ -->
+<!-- !DOCTYPE html: 문서 형식을 정의하는 선언문, HTML5 문서임을 선언  -->
+<!DOCTYPE html>
+
+<!-- 
+  html 태그: 웹 문서의 시작과 끝을 나타낸다. 모든 HTML 요소를 포함
+  lang 속성: 문서의 언어를 지정 (한국어: ko, 영어: en) why? 웹 접근성 = 스크린 리더가 해당 언어로 이쁘게 읽어준다!
+-->
+<html lang="ko">
+  <!-- 
+    head 태그: 웹 브라우저에 표시되지 않는 문서 정보를 포함 (메타데이터: 문서의 정보를 설명)
+  -->
+  <head>
+    <!-- 문서의 인코딩을 유니코드(UTF-8)로 설정 -->
+    <meta charset="UTF-8" />
+    <!-- 문서 상단에 표시되는 제목을 설정 -->
+    <title>HTML 복습 - 다양한 HTML 요소 작성 연습</title>
+  </head>
+  <body>
+    <!-- 
+      h1~h6 태그: 제목을 나타내는 태그, 숫자가 작을수록 중요도가 높음
+      h1: 가장 중요한 제목
+    -->
+    <h1>HTML 복습</h1>
+
+    <h2>1. 중첩 연습하기</h2>
+    <!-- 이미지에 링크 적용 : a 태그로 이미지를 감싸면 이미지를 클릭했을 때 링크로 이동 -->
+    <!-- a 태그: 하이퍼링크를 생성하는 태그, href 속성에 링크 URL을 지정 -->
+    <!-- img 태그: 이미지를 삽입하는 태그, src 속성에 이미지 파일 경로를 지정 -->
+    <!-- 딜라일라와 딕슨 귀여운 강아지...!  -->
+    <a href="https://ssafy.com">
+      <img src="./04_CSS속성/assets/img/delilah.png" alt="이미지가 안보이면 이 텍스트가 대신 나와요!" width="300" />
+    </a>
+    <hr />
+    <h2>2. 리스트 연습하기</h2>
+    <!-- ul 태그: 순서가 없는 리스트를 생성하는 태그 -->
+    <ul>
+      <!-- li 태그: 리스트 항목(아이템)을 생성하는 태그 -->
+      <li>HTML</li>
+      <li>CSS</li>
+      <li>JavaScript</li>
+      <li>
+        프레임워크
+        <!-- 중첩 리스트: 리스트 내에 또 다른 리스트를 생성 -->
+        <!-- ol 태그: 순서가 있는 리스트를 생성하는 태그 -->
+        <ol>
+          <li>React</li>
+          <li>Vue</li>
+          <li>Angular</li>
+        </ol>
+      </li>
+    </ul>
+    <hr />
+    <h2>3. form 태그 활용하기</h2>
+    <!-- form 태그: 사용자 입력 데이터를 서버로 전송하는 영역 -->
+    <!-- action: 폼 데이터를 전송할 서버의 URL을 지정 -->
+    <!-- method: 데이터를 전송하는 방식을 지정 (GET 또는 POST) -->
+    <form action="/submit" method="post">
+      <!-- 텍스트 입력 필드 -->
+      <label for="username">이름:</label>
+      <!-- type="text": 일반 텍스트 입력 필드 -->
+      <!-- id: 각 요소를 고유하게 식별하기 위한 속성, label의 for 속성과 연결 -->
+      <!-- name: 서버에 전송될 때 사용되는 데이터의 이름 -->
+      <!-- placeholder: 입력 필드에 표시되는 힌트 텍스트 -->
+      <input type="text" id="username" name="username" placeholder="이름을 입력하세요" />
+      <br />
+      <br />
+
+      <!-- 비밀번호 입력 필드 -->
+      <label for="password">비밀번호:</label>
+      <!-- type="password": 입력한 문자를 숨김 처리하는 필드 -->
+      <input type="password" id="password" name="userpassword" placeholder="비밀번호를 입력하세요" />
+      <br />
+      <br />
+
+      <!-- 라디오 버튼: 한 그룹 내에서 하나의 옵션만 선택할 수 있음 -->
+      <p>성별:</p>
+      <input type="radio" id="male" name="gender" value="male" />
+      <label for="male">남성</label>
+      <input type="radio" id="female" name="gender" value="female" />
+      <label for="female">여성</label>
+      <br />
+      <br />
+
+      <!-- 드롭다운 목록 (select 태그와 option 태그) -->
+      <label for="country">국가:</label>
+      <select id="country" name="country">
+        <!-- option: 드롭다운 목록 내의 선택 가능한 항목 -->
+        <option value="korea">한국</option>
+        <option value="usa">미국</option>
+        <option value="japan">일본</option>
+      </select>
+      <br />
+      <br />
+
+      <!-- 여러 줄 텍스트 입력 (textarea 태그) -->
+      <label for="message">메시지:</label>
+      <br />
+      <!-- rows: 텍스트 영역의 행 수, cols: 열 수 (너비) -->
+      <textarea id="message" name="message" rows="5" cols="30" placeholder="메시지를 입력하세요"></textarea>
+      <br />
+      <br />
+
+      <!-- 숫자 입력 필드: 사용자의 나이를 받음 -->
+      <label for="age">나이:</label>
+      <!-- type="number": 숫자 입력 전용 필드 -->
+      <!-- min, max: 입력 가능한 값의 범위를 제한할 때 사용 -->
+      <input type="number" id="age" name="age" placeholder="나이를 입력하세요" min="0" max="120" />
+      <br />
+      <br />
+
+      <!-- 체크박스: 사용자가 여러 옵션 중 복수 선택 가능 -->
+      <!-- 개인정보 확인을 위한 체크박스 -->
+      <input type="checkbox" id="privacy" name="privacy" />
+      <!-- 체크박스와 연동된 label: 사용자가 체크박스의 용도를 이해하도록 설명 -->
+      <label for="privacy">개인정보 수집 및 이용에 동의합니다.</label>
+      <br />
+      <br />
+
+      <!-- 제출 버튼: form 데이터를 서버로 전송 -->
+      <input type="submit" value="제출" />
+      <input type="button" value="취소" />
+      <button>로그인</button>
+      <button>회원가입</button>
+      <!-- type="reset": 폼 내의 입력된 데이터를 초기화하는 버튼 -->
+      <input type="reset" value="초기화" />
+    </form>
+  </body>
+</html>

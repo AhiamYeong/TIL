@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="./assets/style.css">
+</head>
+<body>
+  <div id="divA">A</div>
+  <div id="divB">B1</div>
+  <!-- <div id="divB">B2</div> -->
+  <div id="divC">C</div>
+  <script>
+    // remove: element에 삭제 / 부모 엘리먼트 불필요
+    const element = document.getElementById('divB')
+    // 되긴 되는데 id가 divB인게 2개 자체가 말이 안된다는거지 
+    element.remove()
+  </script>
+</body>
+</html>

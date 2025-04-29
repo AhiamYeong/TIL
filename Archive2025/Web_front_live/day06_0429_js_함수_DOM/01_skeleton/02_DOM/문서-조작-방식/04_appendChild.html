@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="./assets/style.css">
+</head>
+<body>
+  
+  <script>
+    // appendChild: 노드만 가능, 추가한 노드를 리턴해줌, 한번에 하나만 추가 가능
+    // appendChild에는 text(문자열) 추가 불가능
+    const parents2 = document.createElement('div')
+    const child2 = document.createElement('p')
+    
+    // child2.appendChild('p태그추가') // 이건 불가능
+    child2.append('p태그 추가')
+    parents2.appendChild(child2)
+
+    document.body.append(parents2)
+
+  </script>
+</body>
+</html>

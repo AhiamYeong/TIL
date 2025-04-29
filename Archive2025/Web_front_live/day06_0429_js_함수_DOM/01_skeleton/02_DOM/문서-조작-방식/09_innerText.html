@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="./assets/style.css">
+</head>
+<body>
+  <span>Jackson</span>
+  <script>
+    // 작성한 태그네임의 html 요소 생성해서 반환 
+    // node 객체와 그 자손의 텍스트 컨텐츠(DOM string 포함)
+    const a = document.querySelector("span").innerText 
+    console.log(a) // element 접근 후 innerText로 값 확인 
+
+    document.querySelector("span").innerText = "Eevee" // 텍스트 바꾸기
+    const b = document.querySelector("span").innerText
+    console.log(b)
+
+  </script>
+</body>
+</html>

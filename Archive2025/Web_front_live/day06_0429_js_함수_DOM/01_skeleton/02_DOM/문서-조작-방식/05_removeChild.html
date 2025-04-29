@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="./assets/style.css">
+</head>
+<body>
+  <div id="parents">
+    <div id="child"></div>
+    <div id="child"></div>
+  </div>
+  <script>
+    // removeChild: Node 삭제 / 매개변수로 삭제된 노드의 참조 반환 
+    // 지울 노드 여러 개 있으면 딱 1개만 지워진당
+    const parent = document.getElementById('parents') 
+    const child = document.getElementById('child')
+
+    // removeChild: 부모요소 잡고, 부모요소 내 '매개변수' 이름 작성한 변수 지우기
+    const away = parent.removeChild(child) 
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="./assets/style.css">
+</head>
+<body>
+  
+  <script>
+    // 매개변수에 담은 속성 이름에 값 추가 
+    // element 생성 (img 태그는 이미 존재하는 )
+    const img = document.createElement("img")
+    // 생성한 element의 속성 추가 (이미 있는 속성들 )
+    img.setAttribute("src", "./assets/img/dixon.png")
+    img.setAttribute("width", 200)
+
+    // 문서에 추가해주기 
+    document.body.append(img)
+
+    // 이것도 가능~
+    // img.src = ""
+    // img.width = 100 
+  </script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="./assets/style.css">
+</head>
+<body>
+  <div id="list"></div>
+  <script>
+    // 요소 내용을 HTML 내용 그대로 변경: 작성한 tagName html 요소 생성해서 반환 
+    let list = document.getElementById("list") // ele 접그 
+
+    // 2 처리할 작업 진행 
+    // list 안에 직접 넣어서 반환 
+    // 이거 위험해: 왜? -> 그........ 뭐 또 있는데 eval()? 
+    list.innerHTML = "<img src='./assets/img/dixon.png' width='200' height='200'>"
+    
+  </script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="./assets/style.css">
+</head>
+<body>
+  <div id="ele"></div>
+
+  <script>
+    // createElement: tagName의 HTML 요소 생성해서 리턴 
+    // createElement는 메모리 어딘가에 만든다는 뜻이고, 이걸 append/appendChild/insert 등
+    // 어쩌구로 어디든 반드시 붙여줘야 함 
+    
+    const img = document.createElement("img") // img라는 html 요소 생성해 리턴 
+    console.log(img) // 'img' 태그 만들어짐 
+
+    let parent = document.getElementById("ele") // div 태그를 가져옴 
+    parent.append(img) // img 태그가 <div ele>안에 들어가써 
+  </script>
+</body>
+</html>

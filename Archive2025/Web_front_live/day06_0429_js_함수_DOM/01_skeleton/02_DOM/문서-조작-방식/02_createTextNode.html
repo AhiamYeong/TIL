@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="./assets/style.css">
+</head>
+<body>
+  <p id="p"></p>
+  <script>
+    // 작성한 text element 만들어서 리턴
+    const myText = document.createTextNode("SSAFY")
+    let pTag = document.getElementById("p")
+    pTag.appendChild(myText) // p 태그 안에 '자식'노드로 myText 끼워넣기
+  
+  </script>
+</body>
+</html>
