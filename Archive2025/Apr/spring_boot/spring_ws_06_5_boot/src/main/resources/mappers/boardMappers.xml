@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.ws.dao.BoardDao">
+
+	<!-- C: 게시판 새로 생성하기 -->
+	<!-- parameter type에 alias 지정됨? ㅇ -->
+	<insert id="createBoard" parameterType="Board">
+		INSERT INTO board 
+		VALUES(#{name}, #{description});
+	</insert>
+	
+	<!-- R: 이름 기반 게시판 들어가서 name id와 일치하는 article 반환  -->
+	<!-- resultType에 list면 어떻게 반환? 그냥 DAO로? -->
+	<select id="readBoard" resultType="Article" parameterType="String">
+		SELECT * FROM board 
+		WHERE name = #{name};
+	</select>
+	
+	<!-- U: 이름 기반 게시판 수정하기 (name, description 수정) --> 
+	<update id="updateBoard" parameterType="String">
+		UPDATE board 
+		SET name = #{name}, description = #{description}
+		WHERE name = #{name};
+	</update>
+	
+	<!-- D: 이름 기반 게시판 삭제하기 -->
+	<delete id="deleteBoard">
+		DELETE FROM board
+		WHERE name = #{name};
+	</delete>
+</mapper>
