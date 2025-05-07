@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>EventLoop</h1>
+    <script>
+      // 순서대로 출력해보기
+      // Hi
+      // a
+      // b
+      // c
+      // Bye
+
+      // 코드를 작성하세요. (setTimeout() 활용)
+
+      // 프로그램 흐름은 위 -> 아래로 내려가려고 하는데...
+      // 가지 말라니까 webapi 내로 빠지게 된다! 빠져서 기다린다!
+
+      console.log("Hi");
+      // console.log("a")
+      // console.log("b")
+      // console.log("c")
+      // console.log("bye")
+
+      setTimeout(function () {
+        console.log("Bye");
+      }, 4000);
+      setTimeout(function () {
+        console.log("b");
+      }, 2000);
+      setTimeout(function () {
+        console.log("c");
+      }, 3000);
+      setTimeout(function () {
+        console.log("a");
+      }, 0);
+
+      // 배경색 바꾸기 코드를 작성하세요. (setInterval() 활용)
+      // setTimeOut: 해당 초 지나면 1회 동작해라
+      // setInterval: 해당 초 간격마다 계속해서 동작해라
+      setInterval(() => {
+        let bg = document.body.style.background;
+        if (bg == "red") {
+          document.body.style.background = "blue";
+        } else {
+          document.body.style.background = "red";
+        }
+      }, 1000);
+    </script>
+  </body>
+</html>

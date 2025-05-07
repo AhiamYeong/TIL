@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Text 파일 이용</title>
+  </head>
+  <body>
+    <h1>서버에서 받은 메시지</h1>
+    <!-- 보여질 화면 -->
+    <div id="msg-view"></div>
+    <button id="get-data">요청</button>
+
+    <script>
+      let xhr; // 사용 위해 미리 선언
+
+      // 1. 클라이언트에서 이벤트 발생 (버튼 클릭시마다)
+      document.querySelector("#get-data").addEventListener("click", () => {
+        // 2. xhr 객체 생성
+        xhr = new XMLHttpRequest();
+
+        // 3. xhr 상태 변경에 따른 콜백함수 지정 OR 생성
+        // responseMsg(): 즉시 실행, responseMsg: 함수 넘기기(콜백 등록)
+        xhr.onreadystatechange = responseMsg;
+
+        // 4. open
+        xhr.open("GET", "./data/hello.txt", true);
+
+        // 5. send
+        xhr.send();
+      });
+
+      // 함수 선언: hoisting 땜에 아래에 있어도 ok / 코드 실행 전 메모리에 먼저 등록됨됨
+      function responseMsg() {
+        // 정상적 요청 주고받았을 때
+        if (xhr.readyState === 4) {
+          if (xhr.status === 200) {
+            console.log(xhr);
+            document.querySelector("#msg-view").innerText = xhr.response;
+          } else {
+            console.log("정상적으로 못 받앗자나");
+          }
+        }
+      }
+    </script>
+  </body>
+</html>

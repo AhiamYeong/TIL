@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Dog API</title>
+  </head>
+  <body>
+    <div>
+      <h1>Dog API</h1>
+      <div>
+        <button id="btn1">XMLHttpRequest</button>
+        <button id="btn2">Fetch</button>
+      </div>
+      <div>
+        <img src="" alt="" id="dog-img" />
+      </div>
+    </div>
+    <script>
+      const URL = "https://dog.ceo/api/breeds/image/random";
+
+      // 1 fetch
+      document.querySelector("#btn2").addEventListener("click", () => {
+        fetch(URL)
+          .then((response) => {
+            // console.log(response.text());
+            //console.log(response.json());
+            return response.json();
+          })
+          .then((imgData) => {
+            console.log(imgData);
+            // .을 이용해 접근할 수 있는 속성이 있고
+            // setAttribute를 통해 접근할 수 있는 속성이 있다
+            document.querySelector("#dog-img").setAttribute("src", imgData.message);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      });
+    </script>
+  </body>
+</html>

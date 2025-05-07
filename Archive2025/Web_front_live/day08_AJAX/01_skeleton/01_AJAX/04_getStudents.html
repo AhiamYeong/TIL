@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>JSON 파일 이용</title>
+  </head>
+
+  <body>
+    <h1>JSON 파일을 읽어 멤버를 호출해보자</h1>
+    <textarea id="student" cols="30" rows="10"></textarea>
+    <input type="button" value="출석" onclick="requestMsg()" />
+    <script>
+      // addEventListener 없이 onclick method로 정의도 가능
+      function requestMsg() {
+        const xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+              console.log(xhr.response); // 문자열 넘어왔슴
+              const list = JSON.parse(xhr.response); // 객체 배열 형태로 변경
+
+              const textarea = document.querySelector("#student");
+
+              for (let i = 0; i < list.length; i++){
+                // ?-? 템플릿 리터럴: 문자열 안에 변수, 표현식 등 집어넣기
+                // list[i].id + " : " + list[i].name + "\n" 를 편하게 바꾼겨  
+                textarea.value += `${list[i].id} : ${list[i].name}\n`;
+              }
+            }
+          }
+        }; // change
+
+        xhr.open("GET", "./data/students.json");
+        xhr.send();
+      }
+    </script>
+  </body>
+</html>

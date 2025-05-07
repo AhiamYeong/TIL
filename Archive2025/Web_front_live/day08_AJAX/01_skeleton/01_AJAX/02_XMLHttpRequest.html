@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <script>
+      const URL = "https://jsonplaceholder.typicode.com/todos/1";
+
+      // XMLHttpRequest 객체 생성하기
+      const xhr = new XMLHttpRequest();
+
+      // 1 준비 open
+      xhr.open("GET", URL);
+
+      // 2. 요청 발사 send
+      xhr.send();
+
+      console.log(xhr);
+
+      // 이렇게만 하면 안나옴..?!
+      // const todo = xhr.response;
+      // console.log(todo);
+
+      // 객체 property에 함수 직접 지정
+      // XMLHttpRequest 객체는 상태가 바뀔 때마다 onreadystatechange를 호출
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState == xhr.DONE) {
+          if (xhr.status == 200) {
+            const todo = xhr.response;
+            console.log(todo); // 이놈 그냥 문자열임
+
+            // 그래서 JSON parsing 해주면 객체로 바껴 > 실제 사용은 JSON
+            console.log(JSON.parse(todo));
+          }
+        }
+      };
+    </script>
+  </body>
+</html>
