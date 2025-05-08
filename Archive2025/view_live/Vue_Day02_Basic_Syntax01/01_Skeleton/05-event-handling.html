@@ -9,8 +9,20 @@
   <body>
     <div id="app">
       <p>Count : {{count}}</p>
+      <!-- inline handler: HTML 요소에 직접 붙이기 -->
       <button @click="count++">증가</button>
       <button @click="count--">감소</button>
+      <hr />
+      <button @click="myFunc">메소드 동작</button>
+      <hr />
+      <button @click="greeting('하위')">하위</button>
+      <button @click="greeting('바위')">바위</button>
+      <!-- 넘긴 이벤트 출력된게 ?! -->
+      <button @click="warning('보', $event)">보</button>
+      <hr />
+      <!-- preventDefault 호출하지 말고 onLink에서 잘 좀 처리해라~ -->
+      <a @click.stop.prevent="onLink" href="https://ssafy.com">공홈</a>
+      <input type="text" @keyup.enter="onSubmit" />
     </div>
     <script>
       const { createApp, ref } = Vue;
@@ -18,9 +30,37 @@
       const app = createApp({
         setup() {
           const count = ref(0);
-          return { 
+          const name = ref("Jang");
+          const myFunc = function () {
+            console.log(event);
+            console.log(event.target);
+            console.log(`Hello ${name.value}`);
+          };
+          const greeting = function (message) {
+            console.log(message);
+          };
+
+          const warning = function (message, event) {
+            console.log(message);
+            console.log(event);
+          };
+          const onLink = function () {
+            console.log("링크 막았슴슴");
+          };
+
+          const onSubmit = function () {
+            console.log("엔터 눌렀지롱");
+          };
+
+          return {
             count,
-           };
+            name,
+            myFunc,
+            greeting,
+            warning,
+            onLink,
+            onSubmit,
+          };
         },
       });
       app.mount("#app");

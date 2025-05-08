@@ -8,6 +8,13 @@
 
   <body>
     <div id="app">
+      <div :style="{color: activeColor, fontSize: fontSize + 'px'}">글자1</div>
+      <!-- 얘도 가넝이야 -->
+      <div :style="{color: activeColor, 'font-size': fontSize + 'px'}">글자2</div>
+      <!-- 템플릿: 좀 더 깔끔하게 사용 가능 -->
+      <div :style="styleObj">글자3</div>
+      <!-- 스타일 배열 가능 -->
+      <div :style="[styleObj, styleObj2]">글자4</div>
     </div>
     <script>
       const { createApp, ref } = Vue;

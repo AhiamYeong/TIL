@@ -8,8 +8,15 @@
 
   <body>
     <div id="app">
+      <!-- input event 들어왔을 때 onInput 메소드 동작-->
+      <!-- 1. v-on과 v-bind 함께 사용 -->
+      <input :value="inputText1" type="text" @input="onInput" />
       <p>{{inputText1}}</p>
+
       <hr />
+      <!-- 2. v-model 사용 -->
+      <!-- v-model의 단점! 한 박자가 늦는다! -->
+      <input type="text" v-model="inputText2" />
       <p>{{inputText2}}</p>
     </div>
     <script>
@@ -19,9 +26,15 @@
         setup() {
           const inputText1 = ref("");
           const inputText2 = ref("");
+          const onInput = function () {
+            // event: 자동 넘어옴
+            inputText1.value = event.target.value;
+          };
+
           return {
             inputText1,
             inputText2,
+            onInput,
           };
         },
       });
