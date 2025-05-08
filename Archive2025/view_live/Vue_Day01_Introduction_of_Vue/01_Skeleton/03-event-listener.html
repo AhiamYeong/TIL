@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Vue</title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- v:on으로 이벤트 걸기 (addEventListener 대신): @로 쓰기도 함 -->
+      <!-- <button v-on:click="count++">{{count}}</button> -->
+      <!-- plus method 생성 -->
+      <button v-on:click="plus">{{count}}</button>
+    </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+      // 인스턴스 생성
+      const { createApp, ref } = Vue;
+
+      const app = createApp({
+        // 변수 & 함수 선언하기 위한 함수가 setup
+        setup() {
+          // 반응성 위한 ref 선언
+          const count = ref(0);
+          // const count = 0; 그냥 선언하면 반응성은 없음음
+
+          // 함수표현식 생성
+          const plus = function () {
+            count.value++; // count로 하면 증가 안됨!
+          };
+          // 객체 형태 반환
+          // 객체의 key: value -> "count": count로 반환한 것것
+          return {
+            count,
+            plus,
+          };
+        },
+      });
+
+      // 인스턴스 부착
+      app.mount("#app");
+    </script>
+  </body>
+</html>
