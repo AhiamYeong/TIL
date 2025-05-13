@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Vue</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  </head>
+
+  <body>
+    <div id="app">
+      <!-- <img src="" alt=""> 이건 src가 언제 고쳐질지 몰라~~!-->
+      <!-- 동적바인딩~~ 얘 엄청나게 씀 그래서 생략해도 댐 -->
+      <img v-bind:src="imageSrc" />
+      <a :href="myUrl">싸피공홈</a>
+      <div :[dyattr]="dyvalue">동적</div>
+    </div>
+    <script>
+      const { createApp, ref } = Vue;
+
+      const app = createApp({
+        setup() {
+          const imageSrc = ref("https://picsum.photos/200");
+          const myUrl = ref("https://ssafy.com");
+          const dyattr = ref("dynamic-attribute");
+          const dyvalue = ref("hello");
+
+          // 동적 속성은 카멜케이스로 쓰면 또 안돼!!!!!!!!!!!!
+          return { imageSrc, myUrl, dyattr, dyvalue };
+        },
+      });
+      app.mount("#app");
+    </script>
+  </body>
+</html>

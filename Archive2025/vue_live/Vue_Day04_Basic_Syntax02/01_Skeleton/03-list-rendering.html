@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Vue</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  </head>
+
+  <body>
+    <div id="app">
+      <!-- v-for(기본) 활용 -->
+      <div v-for="person in myArr">{{person.name}} / {{person.age}}</div>
+      <hr />
+      <!-- v-for(인덱스) 파라미터 작성 순서가 매우중요 활용 -->
+      <div v-for="(person, index) in myArr">{{index+1}} : {{person.name}} / {{person.age}}</div>
+      <hr />
+      <!-- v-for(객체) -->
+      <div v-for="value in myObj">{{value}}</div>
+      <!-- v-for(객체, key) -->
+      <div v-for="(value, key) in myObj">{{key}} : {{value}}</div>
+      <hr />
+      <!-- v-for(객체, key, index) -->
+      <div v-for="(value, key, index) in myObj">{{index}} = {{key}} : {{value}}</div>
+
+      <hr />
+      <!-- 여러요소 동레벨로 -->
+      <ul>
+        <template v-for="item in myArr">
+          <li>{{item.name}}</li>
+          <li>{{item.age}}</li>
+          <hr />
+        </template>
+      </ul>
+    </div>
+    <script>
+      const { createApp, ref } = Vue;
+
+      const app = createApp({
+        setup() {
+          const myArr = ref([
+            { name: "Alice", age: 20 },
+            { name: "Bella", age: 21 },
+          ]);
+          const myObj = ref({
+            name: "Cathy",
+            age: 30,
+          });
+
+          const myInfo = ref([
+            { name: "Alice", age: 20, friends: ["Bella", "Cathy", "Dan"] },
+            { name: "Bella", age: 21, friends: ["Alice", "Cathy"] },
+          ]);
+
+          return {
+            myArr,
+            myObj,
+            myInfo,
+          };
+        },
+      });
+      app.mount("#app");
+    </script>
+  </body>
+</html>

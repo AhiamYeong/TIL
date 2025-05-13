@@ -1,0 +1,47 @@
+<!-- watch: 반응형 데이터 감시 & 감시 데이터 변경시 콜백함수 호출 -->
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Vue</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  </head>
+
+  <body>
+    <div id="app">
+      <p>{{count}}</p>
+      <button @click="count++">증가</button>
+      <hr />
+      <input type="text" v-model="message" />
+      <p>{{messageLength}}</p>
+    </div>
+
+    <script>
+      const { createApp, ref, watch } = Vue;
+      const app = createApp({
+        setup() {
+          const count = ref(0);
+          const countWatch = watch(count, (newValue, oldValue) => {
+            console.log(`old: ${oldValue} -> new: ${newValue}`);
+          });
+          const message = ref("");
+          const messageLength = ref(0);
+
+          // watch는 위에서 쓰는거 아니라 반환 안해도 잘 되기는 함
+          const messageWatch = watch(message, (newValue) => {
+            messageLength.value = newValue.length;
+          });
+
+          return {
+            count,
+            countWatch,
+            message,
+            messageLength,
+          };
+        },
+      });
+
+      app.mount("#app");
+    </script>
+  </body>
+</html>

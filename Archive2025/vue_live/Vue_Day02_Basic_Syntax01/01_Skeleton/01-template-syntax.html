@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Vue</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  </head>
+
+  <body>
+    <div id="app">
+      <!-- 1 콧수염 구문(가장 기본) -->
+      <p>{{msg}}</p>
+      <!-- <p>{{rawHTML}}</p> -->
+      <!-- 2 rawHTML: v-view에서 활용 -->
+      <div v-html="rawHTML"></div>
+      <!-- 3 속성 바인딩: 개발자 도구 창에서는 'myId'로 보인다 -->
+      <div v-bind:id="dynamicId">욥</div>
+      <!-- 4 JS 표현식 -->
+      <div>{{flag? "Yes": "No"}}</div>
+      <!-- 문자열 뒤집기는.. 마숙?! -->
+      <!-- ${number}: 템플릿 리터럴 문법: 동적id 가능 -->
+      <div v-bind:id="`list=${number}`">동적Id</div>
+      <!-- 조건부 렌더링 -->
+      <!-- if, show는 보여주거나 숨기거나인데 
+        if는 주석처리 show는 console에서도 날려버리기 -->
+      <div v-if="flag">이거보임?</div>
+      <div v-show="flag">이거보임?2</div>
+    </div>
+    <script>
+      const { createApp, ref } = Vue;
+
+      const app = createApp({
+        setup() {
+          const msg = ref("왔나??");
+          const rawHTML = ref(`<span style="color:red"> This should be red.</span>`);
+          const dynamicId = ref("my-id");
+          const number = ref(1);
+          const flag = ref(false);
+
+          return { msg, rawHTML, dynamicId, number, flag };
+        },
+      });
+      app.mount("#app");
+    </script>
+  </body>
+</html>
