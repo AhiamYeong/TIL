@@ -11,5 +11,3 @@
 import MyComponent from "@/components/MyComponent.vue";
 // @: src folder 의미 (vite.config 내에 @ 등록되어있는지 확인)
 </script>
-
-<style lang="scss" scoped></style>
